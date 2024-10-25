@@ -1,6 +1,6 @@
 import { integer, varchar } from "drizzle-orm/pg-core";
 import { pgTable } from "@/db/schema";
-import { createInsertSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -10,6 +10,7 @@ export const usersTable = pgTable("users", {
 });
 
 export const insertUserSchema = createInsertSchema(usersTable);
+export const selectUserSchema = createSelectSchema(usersTable);
 
 export type NewUser = typeof usersTable.$inferInsert;
 export type User = typeof usersTable.$inferSelect;
