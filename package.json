@@ -10,18 +10,16 @@
   },
   "dependencies": {
     "@vercel/postgres": "^0.10.0",
-    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.35.3",
     "drizzle-zod": "^0.5.1",
     "jose": "^5.9.6",
-    "next": "15.0.0",
+    "next": "^15.0.1",
     "react": "19.0.0-rc-65a56d0e-20241020",
     "react-dom": "19.0.0-rc-65a56d0e-20241020",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

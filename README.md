@@ -23,7 +23,6 @@ Como eu também vou usar esse projeto para me manter atualizado com as tecnologi
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Drizzle ORM](https://drizzle.org/)
 - [Zod](https://zod.dev/)
-- [Bcrypt](https://www.npmjs.com/package/bcrypt)
 - [Jose](https://www.npmjs.com/package/jose)
 
 ### Ferramental

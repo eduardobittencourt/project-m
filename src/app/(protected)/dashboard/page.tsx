@@ -1,5 +1,5 @@
+import { deleteSession } from "@/auth/session";
 import { redirect } from "next/navigation";
-import { deleteSession } from "../lib/session";
 
 export default async function DashboardPage() {
   async function logout() {
