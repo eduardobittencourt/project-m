@@ -6,29 +6,16 @@ import { groupsTable, insertGroupSchema } from "@/db/schema/groups";
 import { membersTable } from "@/db/schema/members";
 import { redirect } from "next/navigation";
 
-export async function action(
-  _state: { errors: unknown; success: boolean },
-  formData: FormData,
-) {
+export async function action(formData: FormData) {
   const validationResult = insertGroupSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description"),
   });
 
-  if (!validationResult.success) {
-    return {
-      errors: validationResult.error.flatten().fieldErrors,
-      success: false,
-    };
-  }
+  if (!validationResult.success) return;
 
   const user = await getUser();
-  if (!user) {
-    return {
-      errors: { name: "You must be logged in to create a group" },
-      success: false,
-    };
-  }
+  if (!user) return;
 
   const { name, description } = validationResult.data;
 
