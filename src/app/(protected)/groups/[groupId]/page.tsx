@@ -1,6 +1,6 @@
 import { getGroup } from "@/data/groups";
 
-type GroupParams = { params: { groupId: string } };
+type GroupParams = { params: Promise<{ groupId: string }> };
 
 export default async function EditGroupPage({ params }: Readonly<GroupParams>) {
   const { groupId } = await params;
