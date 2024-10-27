@@ -1,6 +1,6 @@
 "use server";
 
-import { logout } from "@/auth";
+import { logout } from "@/data/auth";
 import { redirect } from "next/navigation";
 
 export async function action() {

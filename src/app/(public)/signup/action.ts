@@ -1,6 +1,6 @@
 "use server";
 
-import { signup } from "@/auth";
+import { signup } from "@/data/auth";
 import { insertUserSchema } from "@/db/schema/users";
 import { redirect } from "next/navigation";
 

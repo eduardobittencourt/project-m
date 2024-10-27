@@ -1,6 +1,6 @@
-import { updateSession } from "@/auth/session";
 import { NextRequest, NextResponse } from "next/server";
-import { isAuthenticated } from "./auth";
+import { isAuthenticated } from "@/data/users";
+import { updateSession } from "@/lib/session";
 
 const protectedRoutes = ["/dashboard"];
 const publicRoutes = ["/", "/login", "/signup"];

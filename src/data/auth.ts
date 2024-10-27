@@ -1,11 +1,8 @@
-"use server";
-
-import { createSession, deleteSession, readSession } from "@/auth/session";
 import { db } from "@/db";
 import { User, usersTable } from "@/db/schema/users";
+import { encrypt, match } from "@/lib/crypto";
+import { createSession, deleteSession } from "@/lib/session";
 import { eq } from "drizzle-orm";
-import { cache } from "react";
-import { encrypt, match } from "./crypto";
 
 export async function signup(
   name: User["name"],
@@ -51,28 +48,3 @@ export async function login(email: User["email"], password: User["password"]) {
 export async function logout() {
   await deleteSession();
 }
-
-export const getUser = cache(async () => {
-  const session = await readSession();
-
-  if (!session) return null;
-
-  const data = await db
-    .select({
-      id: usersTable.id,
-      name: usersTable.name,
-      email: usersTable.email,
-    })
-    .from(usersTable)
-    .where(eq(usersTable.id, session.userId));
-
-  const user = data[0];
-
-  return user;
-});
-
-export const isAuthenticated = cache(async () => {
-  const session = await readSession();
-
-  return !!session;
-});
