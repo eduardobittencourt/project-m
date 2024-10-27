@@ -4,7 +4,7 @@ import { getUser } from "@/data/users";
 import { db } from "@/db";
 import { groupsTable } from "@/db/schema/groups";
 import { membersTable } from "@/db/schema/members";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { cache } from "react";
 
 export const getGroups = cache(async () => {
@@ -22,4 +22,21 @@ export const getGroups = cache(async () => {
     .where(eq(membersTable.userId, user.id));
 
   return groups;
+});
+
+export const getGroup = cache(async (id: number) => {
+  const user = await getUser();
+  if (!user) return null;
+
+  const [group] = await db
+    .select({
+      id: groupsTable.id,
+      name: groupsTable.name,
+      description: groupsTable.description,
+    })
+    .from(membersTable)
+    .innerJoin(groupsTable, eq(groupsTable.id, membersTable.groupId))
+    .where(and(eq(membersTable.userId, user.id), eq(groupsTable.id, id)));
+
+  return group;
 });

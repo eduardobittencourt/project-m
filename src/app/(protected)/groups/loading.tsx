@@ -1,7 +1,7 @@
-export default async function DashboardPage() {
+export default async function GroupsLoading() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center">
-      Nada por aqui, mas autenticado
+      <span>...</span>
     </main>
   );
 }

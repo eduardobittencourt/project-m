@@ -4,10 +4,7 @@ import { login } from "@/data/auth";
 import { selectUserSchema } from "@/db/schema/users";
 import { redirect } from "next/navigation";
 
-export async function action(
-  _state: { errors: unknown; success: boolean },
-  formData: FormData,
-) {
+export async function action(formData: FormData) {
   const validationResult = selectUserSchema
     .pick({ email: true, password: true })
     .safeParse({
@@ -15,12 +12,7 @@ export async function action(
       password: formData.get("password"),
     });
 
-  if (!validationResult.success) {
-    return {
-      errors: validationResult.error.flatten().fieldErrors,
-      success: false,
-    };
-  }
+  if (!validationResult.success) return;
 
   const { email, password } = validationResult.data;
 
