@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/db";
 import { User, usersTable } from "@/db/schema/users";
 import { encrypt, match } from "@/lib/crypto";

@@ -3,14 +3,17 @@
 import { useActionState } from "react";
 import { action } from "./action";
 
-export default function HomePage() {
+export default function LoginPage() {
   const [formState, formAction] = useActionState(action, {
     errors: {},
     success: false,
   });
 
   return (
-    <form action={formAction}>
+    <form
+      action={formAction}
+      className="flex flex-1 flex-col items-center justify-center gap-2"
+    >
       <input type="email" name="email" placeholder="E-mail" />
       {formState?.errors?.email && <p>{formState.errors.email}</p>}
       <input type="password" name="password" placeholder="Senha" />

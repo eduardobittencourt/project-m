@@ -1,3 +1,5 @@
+"use server";
+
 import { getUser } from "@/data/users";
 import { db } from "@/db";
 import { groupsTable } from "@/db/schema/groups";

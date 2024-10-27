@@ -1,17 +1,16 @@
 import { getGroups } from "@/data/groups";
+import Link from "next/link";
 
 export default async function GroupsPage() {
   const groups = await getGroups();
 
   return (
-    <div>
-      <h1>Groups</h1>
+    <main className="flex flex-1 flex-col items-center justify-center">
       {groups.map((group) => (
-        <div key={group.id}>
-          <h2>{group.name}</h2>
-          <p>{group.description}</p>
-        </div>
+        <Link key={group.id} href={`/groups/${group.id}`}>
+          {group.name}
+        </Link>
       ))}
-    </div>
+    </main>
   );
 }
