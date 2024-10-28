@@ -19,6 +19,7 @@ export const cookie = {
 
 type Session = {
   userId: number;
+  groupId?: number;
   expires: Date;
 };
 
@@ -62,10 +63,10 @@ export async function readSession() {
   const session = await decrypt(cookieValue);
   if (!session?.userId) return null;
 
-  return { userId: session.userId };
+  return { userId: session.userId, groupId: session.groupId };
 }
 
-export async function updateSession() {
+export async function updateSession(groupId?: number) {
   const cookieStore = await cookies();
   const cookieValue = cookieStore.get(cookie.name)?.value;
   if (!cookieValue) return null;
@@ -75,7 +76,11 @@ export async function updateSession() {
 
   const expires = new Date(Date.now() + cookie.duration);
 
-  const encryptedSession = await encrypt({ userId: session.userId, expires });
+  const encryptedSession = await encrypt({
+    userId: session.userId,
+    groupId: groupId ?? session.groupId,
+    expires,
+  });
 
   cookieStore.set(cookie.name, encryptedSession, {
     ...cookie.options,

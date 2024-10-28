@@ -1,5 +1,6 @@
 import { getGroups } from "@/data/groups";
 import Link from "next/link";
+import { action } from "./action";
 
 export default async function GroupsPage() {
   const groups = await getGroups();
@@ -7,9 +8,14 @@ export default async function GroupsPage() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center">
       {groups.map((group) => (
-        <Link key={group.id} href={`/groups/${group.id}`}>
-          {group.name}
-        </Link>
+        <div key={group.id}>
+          <Link href={`/groups/${group.id}`}>{group.name}</Link>
+
+          <form action={action}>
+            <input type="hidden" name="id" defaultValue={group.id} />
+            <button type="submit">Selecionar</button>
+          </form>
+        </div>
       ))}
     </main>
   );
