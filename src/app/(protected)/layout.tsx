@@ -22,6 +22,7 @@ export default async function ProtectedLayout({
       <nav className="flex items-center justify-start gap-2 px-4 py-2">
         <Link href="/dashboard">Dashboard</Link>
         <Link href="/groups">Grupos</Link>
+        <Link href="/categories">Categorias</Link>
       </nav>
 
       {children}
