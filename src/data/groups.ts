@@ -42,11 +42,11 @@ export const getGroup = cache(async (id: number) => {
   return group;
 });
 
-export const selectGroup = async (id: number) => {
+export const selectGroup = async (groupId: number) => {
   const user = await getUser();
   if (!user) return null;
 
-  await updateSession(id);
+  await updateSession({ groupId });
 };
 
 export const getSelectedGroup = cache(async () => {

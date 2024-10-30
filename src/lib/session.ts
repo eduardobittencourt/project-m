@@ -20,6 +20,7 @@ export const cookie = {
 type Session = {
   userId: number;
   groupId?: number;
+  date?: Date;
   expires: Date;
 };
 
@@ -63,10 +64,14 @@ export async function readSession() {
   const session = await decrypt(cookieValue);
   if (!session?.userId) return null;
 
-  return { userId: session.userId, groupId: session.groupId };
+  return {
+    userId: session.userId,
+    groupId: session.groupId,
+    date: session.date,
+  };
 }
 
-export async function updateSession(groupId?: number) {
+export async function updateSession(payload?: Partial<Session>) {
   const cookieStore = await cookies();
   const cookieValue = cookieStore.get(cookie.name)?.value;
   if (!cookieValue) return null;
@@ -78,7 +83,8 @@ export async function updateSession(groupId?: number) {
 
   const encryptedSession = await encrypt({
     userId: session.userId,
-    groupId: groupId ?? session.groupId,
+    groupId: payload?.groupId ?? session.groupId,
+    date: payload?.date ?? session.date,
     expires,
   });
 

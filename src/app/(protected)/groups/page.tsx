@@ -6,7 +6,7 @@ export default async function GroupsPage() {
   const groups = await getGroups();
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center">
+    <main className="flex flex-1 items-center justify-center gap-2">
       {groups.map((group) => (
         <div key={group.id}>
           <Link href={`/groups/${group.id}`}>{group.name}</Link>
